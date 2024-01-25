@@ -1,0 +1,48 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                // Your build steps go here
+                script {
+                    echo 'Building...'
+                    // Add commands to build your project
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                // Your test steps go here
+                script {
+                    echo 'Testing...'
+                    // Add commands to run tests
+                }
+            }
+        }
+
+        stage('Deploy') {
+            when {
+                expression { branch == 'master' }
+            }
+            steps {
+                // Your deployment steps go here
+                script {
+                    echo 'Deploying to production...'
+                    // Add commands to deploy to production
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            // Additional post-build actions go here
+            script {
+                echo 'Post-build actions...'
+                // Add commands for post-build actions
+            }
+        }
+    }
+}

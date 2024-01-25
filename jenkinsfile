@@ -1,0 +1,56 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the source code from the version control system (e.g., Git)
+                checkout scm
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // Build your project here
+                script {
+                    echo 'Building...'
+                    // Add commands to build your project
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                // Run tests here
+                script {
+                    echo 'Testing...'
+                    // Add commands to run tests
+                }
+            }
+        }
+
+        stage('Deploy') {
+            when {
+                expression { branch == 'master' }
+            }
+            steps {
+                // Deploy to production (example)
+                script {
+                    echo 'Deploying to production...'
+                    // Add commands to deploy to production
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            // Actions to perform if the pipeline is successful
+            echo 'Pipeline succeeded! You can add notifications or additional actions here.'
+        }
+        failure {
+            // Actions to perform if the pipeline fails
+            echo 'Pipeline failed! You can add notifications or additional actions here.'
+        }
+    }
+}
